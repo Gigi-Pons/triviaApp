@@ -45,7 +45,7 @@ The goal is to show recruiters and engineers how I think, build, and iterate as 
 
 ## 🧩 ERD (Entity Relationship Diagram)
 
-[Insert ERD image or link here]
+![ERD](./erd2.png)
 
 ---
 
