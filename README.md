@@ -25,7 +25,8 @@ The front-end implementation will come after the backend is fully built.
 
 - ✅ Database schema with Flyway migrations  
 - 🟡 Seed data: Categories, Quizzes, Questions, Options  
-- ✅ Entity Relationship Diagram (ERD)  
+- ✅ Entity Relationship Diagram (ERD)
+- ✅ Created 4 of my JPA entities for my existing tables
 - 🔲 REST API for quiz listing and question retrieval  
 - 🔲 User registration + JWT login  
 - 🔲 Quiz gameplay flow (start, answer, complete)  
