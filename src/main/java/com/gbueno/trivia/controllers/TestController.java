@@ -2,6 +2,7 @@ package com.gbueno.trivia.controllers;
 
 import com.gbueno.trivia.dtos.CategoryDto;
 import com.gbueno.trivia.entities.Category;
+import com.gbueno.trivia.entities.TestLombok;
 import com.gbueno.trivia.repositories.CategoryRepository;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
@@ -31,6 +32,10 @@ public class TestController {
             System.out.println("Category ID: " + c.getId());
             System.out.println("Category Name: " + c.getName());
         }
+
+        TestLombok test = new TestLombok();
+        test.setMessage("Hello");
+        System.out.println(test.getMessage());
 
         return categories;
     }
