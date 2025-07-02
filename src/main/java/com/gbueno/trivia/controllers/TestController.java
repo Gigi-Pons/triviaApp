@@ -1,5 +1,6 @@
 package com.gbueno.trivia.controllers;
 
+import com.gbueno.trivia.dtos.CategoryDto;
 import com.gbueno.trivia.entities.Category;
 import com.gbueno.trivia.repositories.CategoryRepository;
 import lombok.AllArgsConstructor;
@@ -24,7 +25,15 @@ public class TestController {
 
     @GetMapping("/categories")
     public List<Category> getAllCategories() {
-        return categoryRepository.findAll();
+        List<Category> categories = categoryRepository.findAll();
+
+        for (Category c : categories) {
+            System.out.println("Category ID: " + c.getId());
+            System.out.println("Category Name: " + c.getName());
+        }
+
+        return categories;
     }
+
 }
 
