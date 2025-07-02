@@ -1,23 +1,25 @@
 package com.gbueno.trivia.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 
 import java.util.Set;
 import java.util.UUID;
 
-@Entity
-@Getter
 @Setter
+@Getter
 @AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@Entity
 @Table(name = "categories")
 public class Category {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private UUID id;
+    private Long id;
 
     @Column(name = "name")
     private String name;

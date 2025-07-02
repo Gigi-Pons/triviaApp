@@ -1,24 +1,25 @@
 package com.gbueno.trivia.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Set;
 import java.util.UUID;
 
-@Entity
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 @Getter
 @Setter
-@AllArgsConstructor
+@Entity
 @Table(name = "questions")
 public class Question {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private UUID id;
+    private Long id;
 
     @Column(name = "text")
     private String text;
