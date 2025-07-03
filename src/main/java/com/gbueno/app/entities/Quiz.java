@@ -1,6 +1,8 @@
 package com.gbueno.app.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,5 +26,6 @@ public class Quiz {
     private Category category;
 
     @OneToMany(mappedBy = "quiz")
+    @JsonIgnore //ignoring for now to prevent infinite loop.  will implement DTOs later
     private Set<Question> questions;
 }

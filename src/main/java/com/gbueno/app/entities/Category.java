@@ -22,6 +22,6 @@ public class Category {
 
     //this is a one to many relationship
     @OneToMany(mappedBy = "category")
-    @JsonIgnore
+    @JsonIgnore //ignoring for now to prevent infinite loop.  will implement DTOs later
     private Set<Quiz> quizzes;
 }
