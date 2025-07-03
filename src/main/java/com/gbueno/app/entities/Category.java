@@ -1,8 +1,11 @@
 package com.gbueno.app.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.Set;
 
 @Entity
 @Getter
@@ -17,5 +20,8 @@ public class Category {
     @Column(name = "name")
     private String name;
 
-
+    //this is a one to many relationship
+    @OneToMany(mappedBy = "category")
+    @JsonIgnore
+    private Set<Quiz> quizzes;
 }
