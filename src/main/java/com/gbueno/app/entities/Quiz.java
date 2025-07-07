@@ -26,6 +26,6 @@ public class Quiz {
     private Category category;
 
     @OneToMany(mappedBy = "quiz")
-    @JsonIgnore //ignoring for now to prevent infinite loop.  will implement DTOs later
+    //@JsonIgnore //ignoring for now to prevent infinite loop.  will implement DTOs later
     private Set<Question> questions;
 }

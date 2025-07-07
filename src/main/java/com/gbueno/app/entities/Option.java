@@ -26,6 +26,6 @@ public class Option {
 
     @ManyToOne
     @JoinColumn(name = "question_id")
-    @JsonIgnore //ignoring for now to prevent infinite loop.  will implement DTOs later
+    //@JsonIgnore //ignoring for now to prevent infinite loop.  will implement DTOs later
     private Question question;
 }

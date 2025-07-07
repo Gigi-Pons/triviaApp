@@ -30,6 +30,6 @@ public class Question {
     private Quiz quiz;
 
     @OneToMany(mappedBy = "question")
-    @JsonIgnore //ignoring for now to prevent infinite loop.  will implement DTOs later
+    //@JsonIgnore //ignoring for now to prevent infinite loop.  will implement DTOs later
     private Set<Option> options;
 }
