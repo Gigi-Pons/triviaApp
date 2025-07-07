@@ -1,5 +1,6 @@
 package com.gbueno.app.controllers;
 
+import com.gbueno.app.dtos.CategoryDto;
 import com.gbueno.app.dtos.QuestionDto;
 import com.gbueno.app.dtos.QuizDto;
 import com.gbueno.app.services.QuizService;
@@ -25,6 +26,11 @@ public class QuizController {
     @GetMapping("/quizzes")
     public List<QuizDto> getQuizzes() {
         return quizService.getAllQuizzes();
+    }
+
+    @GetMapping("/categories")
+    public List<CategoryDto> getCategories() {
+        return quizService.getAllCategories();
     }
 
 }

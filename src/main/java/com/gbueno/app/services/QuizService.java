@@ -1,9 +1,11 @@
 package com.gbueno.app.services;
 
+import com.gbueno.app.dtos.CategoryDto;
 import com.gbueno.app.dtos.OptionDto;
 import com.gbueno.app.dtos.QuestionDto;
 import com.gbueno.app.dtos.QuizDto;
 import com.gbueno.app.entities.Quiz;
+import com.gbueno.app.repositories.CategoryRepository;
 import com.gbueno.app.repositories.OptionRepository;
 import com.gbueno.app.repositories.QuestionRepository;
 import com.gbueno.app.repositories.QuizRepository;
@@ -18,6 +20,7 @@ public class QuizService {
     private final QuizRepository quizRepository;
     private final QuestionRepository questionRepository;
     private final OptionRepository optionRepository;
+    private final CategoryRepository categoryRepository;
 
     public List<QuestionDto> getQuizQuestions(Long quizId) {
         Quiz quiz = quizRepository.findById(quizId)
@@ -48,6 +51,17 @@ public class QuizService {
                     dto.setId(q.getId());
                     dto.setTitle((q.getTitle()));
                     dto.setCategoryName(q.getCategory().getName());
+                    return dto;
+                }).toList();
+    }
+
+    public List<CategoryDto> getAllCategories() {
+        return categoryRepository.findAll()
+                .stream()
+                .map(c -> {
+                    CategoryDto dto = new CategoryDto();
+                    dto.setId(c.getId());
+                    dto.setName(c.getName());
                     return dto;
                 }).toList();
     }
