@@ -2,6 +2,7 @@ package com.gbueno.app.services;
 
 import com.gbueno.app.dtos.OptionDto;
 import com.gbueno.app.dtos.QuestionDto;
+import com.gbueno.app.dtos.QuizDto;
 import com.gbueno.app.entities.Quiz;
 import com.gbueno.app.repositories.OptionRepository;
 import com.gbueno.app.repositories.QuestionRepository;
@@ -37,5 +38,17 @@ public class QuizService {
             questionDto.setOptions(optionDtos);
             return questionDto;
         }).toList();
+    }
+
+    public List<QuizDto> getAllQuizzes() {
+        return quizRepository.findAll()
+                .stream()
+                .map(q -> {
+                    QuizDto dto = new QuizDto();
+                    dto.setId(q.getId());
+                    dto.setTitle((q.getTitle()));
+                    dto.setCategoryName(q.getCategory().getName());
+                    return dto;
+                }).toList();
     }
 }

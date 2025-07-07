@@ -1,6 +1,7 @@
 package com.gbueno.app.controllers;
 
 import com.gbueno.app.dtos.QuestionDto;
+import com.gbueno.app.dtos.QuizDto;
 import com.gbueno.app.services.QuizService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +20,10 @@ public class QuizController {
     @GetMapping("/quizzes/{id}/questions")
     public List<QuestionDto> getQuizQuestions(@PathVariable Long id) {
         return quizService.getQuizQuestions(id);
+    }
+
+    public List<QuizDto> getQuizzes() {
+        return null;
     }
 
 }
