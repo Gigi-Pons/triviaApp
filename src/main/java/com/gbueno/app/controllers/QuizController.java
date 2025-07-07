@@ -22,8 +22,9 @@ public class QuizController {
         return quizService.getQuizQuestions(id);
     }
 
+    @GetMapping("/quizzes")
     public List<QuizDto> getQuizzes() {
-        return null;
+        return quizService.getAllQuizzes();
     }
 
 }
