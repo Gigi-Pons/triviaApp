@@ -20,4 +20,5 @@ public class QuizController {
     public List<QuestionDto> getQuizQuestions(@PathVariable Long id) {
         return quizService.getQuizQuestions(id);
     }
+
 }
