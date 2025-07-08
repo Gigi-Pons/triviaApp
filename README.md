@@ -59,3 +59,9 @@ Expect frequent updates and refactors as I learn and improve the design.
 - Check out the repo
 - Clone and run it
 - Connect with me to share feedback or ideas!
+- 
+
+## 🐞 Debug Journal (Developer Log)
+This project includes a growing collection of documented bugs I encountered while building the API, along with my step-by-step though process, how I solved them, and what I learned.
+
+You can view the full journal in the [`debug-notes/`](./debug-notes) folder.
