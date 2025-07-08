@@ -26,8 +26,16 @@ My custom `<annotationProcessorPaths>` config only included Lombok, so Maven did
 - Rebuilt project
 - Verified `QuizMapperImpl` was generated
 
-  ## Verification
+## Verification
   - `QuizService` now injects `QuizMapper` correctly
   - `target/generated-sources/.../QuizMapperImpl.java` exists
+ 
+## Related Commit 
+[bug(mapstruct): annotationProcessorPaths from pom.xml](https://github.com/Gigi-Pons/triviaApp/commit/c2ba3052dc98b096173ab6919fa63288bc25903d)
+
+## What I Learned
+- When using annotation processors (like MapStruct or Lombok), don't override `annotationProcessorPaths` unless you include everything.
+- Check `target/generated-sources` when a bean implementation is mysteriosly missing.
+- IntelliJ must have annotation enabled
  
   
