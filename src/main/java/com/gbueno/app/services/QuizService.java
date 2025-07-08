@@ -5,6 +5,7 @@ import com.gbueno.app.dtos.OptionDto;
 import com.gbueno.app.dtos.QuestionDto;
 import com.gbueno.app.dtos.QuizDto;
 import com.gbueno.app.entities.Quiz;
+import com.gbueno.app.mappers.QuizMapper;
 import com.gbueno.app.repositories.CategoryRepository;
 import com.gbueno.app.repositories.OptionRepository;
 import com.gbueno.app.repositories.QuestionRepository;
@@ -21,6 +22,7 @@ public class QuizService {
     private final QuestionRepository questionRepository;
     private final OptionRepository optionRepository;
     private final CategoryRepository categoryRepository;
+    private final QuizMapper quizMapper;
 
     public List<QuestionDto> getQuizQuestions(Long quizId) {
         Quiz quiz = quizRepository.findById(quizId)
@@ -58,11 +60,7 @@ public class QuizService {
     public List<CategoryDto> getAllCategories() {
         return categoryRepository.findAll()
                 .stream()
-                .map(c -> {
-                    CategoryDto dto = new CategoryDto();
-                    dto.setId(c.getId());
-                    dto.setName(c.getName());
-                    return dto;
-                }).toList();
+                .map(quizMapper::toCategoryDto)
+                .toList();
     }
 }
