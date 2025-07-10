@@ -27,6 +27,7 @@ public class UserController {
             @Valid @RequestBody RegisterUserRequest request
     ) {
 
+        System.out.println("Check after validation and before mapping");
         //Need to create a userMapper for better readability
         var user = userMapper.toEntity(request);
         userRepository.save(user);
