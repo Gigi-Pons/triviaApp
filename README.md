@@ -27,7 +27,8 @@ The front-end implementation will come after the backend is fully built.
 - 🟡 Seed data: Categories, Quizzes, Questions, Options  
 - ✅ Entity Relationship Diagram (ERD)
 - ✅ Created 4 of my JPA entities for my existing tables
-- 🔲 REST API for quiz listing and question retrieval  
+- 🟡 REST API for quiz listing and question retrieval
+- 🟡 Move DTO mapping into dedicated utility
 - 🔲 User registration + JWT login  
 - 🔲 Quiz gameplay flow (start, answer, complete)  
 - 🔲 Leaderboard endpoint  
@@ -59,3 +60,9 @@ Expect frequent updates and refactors as I learn and improve the design.
 - Check out the repo
 - Clone and run it
 - Connect with me to share feedback or ideas!
+- 
+
+## 🐞 Debug Journal (Developer Log)
+This project includes a growing collection of documented bugs I encountered while building the API, along with my step-by-step though process, how I solved them, and what I learned.
+
+You can view the full journal in the [`debug-notes/`](./debug-notes) folder.
