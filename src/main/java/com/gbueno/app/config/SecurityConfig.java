@@ -2,6 +2,7 @@ package com.gbueno.app.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -18,7 +19,8 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable) // ✅ NEW way to disable CSRF
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/test/**", "/api/**", "/users/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/users").permitAll()
+                        .requestMatchers("/test/**", "/api/**", "/users").permitAll()
                         .anyRequest().authenticated()
                 );
         return http.build();
