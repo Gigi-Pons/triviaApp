@@ -6,6 +6,7 @@ import com.gbueno.app.dtos.QuizDto;
 import com.gbueno.app.dtos.QuizWithQuestionsDto;
 import com.gbueno.app.services.QuizService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,7 +18,9 @@ public class QuizController {
     private final QuizService quizService;
 
     @GetMapping("/quizzes/{id}/questions")
-    public List<QuestionDto> getQuizQuestions(@PathVariable Long id) {
+    public List<QuestionDto> getQuizQuestions(
+            @PathVariable Long id //use when accessing a specific item or resource
+    ) {
         return quizService.getQuizQuestions(id);
     }
 
@@ -32,7 +35,7 @@ public class QuizController {
     }
 
     @GetMapping("/quizzes/random")
-    public QuizWithQuestionsDto getRandomQuiz(
+    public ResponseEntity<QuizWithQuestionsDto> getRandomQuiz(
             @RequestParam Long categoryId // use RequestParam when the value is used to filter, sort, or modify how you retrieve a resource
     ) {
         return quizService.getRandomQuizWithQuestions(categoryId);

@@ -9,6 +9,7 @@ import com.gbueno.app.repositories.OptionRepository;
 import com.gbueno.app.repositories.QuestionRepository;
 import com.gbueno.app.repositories.QuizRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -69,9 +70,14 @@ public class QuizService {
         return quizMapper.toQuizDto(quiz);
     }
 
-    public QuizWithQuestionsDto getRandomQuizWithQuestions(Long categoryId) {
-        Quiz quiz = quizRepository.findRandomQuizByCategoryId(categoryId)
-                .orElseThrow(() -> new RuntimeException("No quiz found"));
+    public ResponseEntity<QuizWithQuestionsDto> getRandomQuizWithQuestions(Long categoryId) {
+        var quiz = quizRepository.findRandomQuizByCategoryId(categoryId).orElse(null);
+        if (quiz == null) {
+            return ResponseEntity.badRequest().build();
+        }
+
+//        Quiz quiz = quizRepository.findRandomQuizByCategoryId(categoryId)
+//                .orElseThrow(() -> new RuntimeException("No quiz found"));
 
         QuizWithQuestionsDto dto = new QuizWithQuestionsDto();
         dto.setId(quiz.getId());
@@ -88,7 +94,7 @@ public class QuizService {
                 }).toList();
 
             dto.setQuestions(questions);
-            return dto;
+            return ResponseEntity.ok(dto);
     }
 
 }
