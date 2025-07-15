@@ -1,10 +1,8 @@
 package com.gbueno.app.services;
 
-import com.gbueno.app.dtos.CategoryDto;
-import com.gbueno.app.dtos.OptionDto;
-import com.gbueno.app.dtos.QuestionDto;
-import com.gbueno.app.dtos.QuizDto;
+import com.gbueno.app.dtos.*;
 import com.gbueno.app.entities.Quiz;
+import com.gbueno.app.mappers.QuestionMapper;
 import com.gbueno.app.mappers.QuizMapper;
 import com.gbueno.app.repositories.CategoryRepository;
 import com.gbueno.app.repositories.OptionRepository;
@@ -23,6 +21,7 @@ public class QuizService {
     private final OptionRepository optionRepository;
     private final CategoryRepository categoryRepository;
     private final QuizMapper quizMapper;
+    public final QuestionMapper questionMapper;
 
     public List<QuestionDto> getQuizQuestions(Long quizId) {
         Quiz quiz = quizRepository.findById(quizId)
@@ -68,6 +67,28 @@ public class QuizService {
         Quiz quiz = quizRepository.findRandomQuizByCategoryId(categoryId)
                 .orElseThrow(() -> new RuntimeException("No quiz found for this category"));
         return quizMapper.toQuizDto(quiz);
+    }
+
+    public QuizWithQuestionsDto getRandomQuizWithQuestions(Long categoryId) {
+        Quiz quiz = quizRepository.findRandomQuizByCategoryId(categoryId)
+                .orElseThrow(() -> new RuntimeException("No quiz found"));
+
+        QuizWithQuestionsDto dto = new QuizWithQuestionsDto();
+        dto.setId(quiz.getId());
+        dto.setTitle(quiz.getTitle());
+        dto.setCategoryName(quiz.getCategory().getName());
+
+        //get the list of questions
+        List<QuestionDto> questions = questionRepository.findByQuiz(quiz)
+                .stream()
+                .map(question -> {
+                    QuestionDto q = questionMapper.toQuestionDto(question);
+                    q.setOptions(questionMapper.toOptionDtoList(optionRepository.findByQuestion(question)));
+                    return q;
+                }).toList();
+
+            dto.setQuestions(questions);
+            return dto;
     }
 
 }
