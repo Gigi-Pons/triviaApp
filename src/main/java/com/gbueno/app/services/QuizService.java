@@ -63,4 +63,11 @@ public class QuizService {
                 .map(quizMapper::toCategoryDto)
                 .toList();
     }
+
+    public QuizDto getRandomQuizByCategoryId(Long categoryId) {
+        Quiz quiz = quizRepository.findRandomQuizByCategoryId(categoryId)
+                .orElseThrow(() -> new RuntimeException("No quiz found for this category"));
+        return quizMapper.toQuizDto(quiz);
+    }
+
 }

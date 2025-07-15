@@ -5,10 +5,7 @@ import com.gbueno.app.dtos.QuestionDto;
 import com.gbueno.app.dtos.QuizDto;
 import com.gbueno.app.services.QuizService;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -32,5 +29,13 @@ public class QuizController {
     public List<CategoryDto> getCategories() {
         return quizService.getAllCategories();
     }
+
+    @GetMapping("/quizzes/random")
+    public QuizDto getRandomQuiz(
+            @RequestParam Long categoryId // use RequestParam when the value is used to filter, sort, or modify how you retrieve a resource
+    ) {
+        return quizService.getRandomQuizByCategoryId(categoryId);
+    }
+
 
 }
