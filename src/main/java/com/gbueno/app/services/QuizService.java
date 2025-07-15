@@ -76,8 +76,6 @@ public class QuizService {
             return ResponseEntity.badRequest().build();
         }
 
-//        Quiz quiz = quizRepository.findRandomQuizByCategoryId(categoryId)
-//                .orElseThrow(() -> new RuntimeException("No quiz found"));
 
         QuizWithQuestionsDto dto = new QuizWithQuestionsDto();
         dto.setId(quiz.getId());

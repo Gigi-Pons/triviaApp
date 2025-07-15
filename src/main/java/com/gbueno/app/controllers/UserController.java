@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.UriComponentsBuilder;
+
+import java.util.Map;
 
 @RestController
 @AllArgsConstructor
@@ -23,16 +26,22 @@ public class UserController {
     //Not checking for duplicates yet
 
     @PostMapping
-    public ResponseEntity<UserDto> registerUser(
-            @Valid @RequestBody RegisterUserRequest request
+    public ResponseEntity<?> registerUser(
+            @Valid @RequestBody RegisterUserRequest request,
+            UriComponentsBuilder uriBuilder
     ) {
 
-        System.out.println("Check after validation and before mapping");
-        //Need to create a userMapper for better readability
+        if (userRepository.existsByEmail(request.getEmail())) {
+            return ResponseEntity.badRequest().body(
+                    Map.of("email", "Email is already registered")
+            );
+        }
+
         var user = userMapper.toEntity(request);
         userRepository.save(user);
 
         var userDto = userMapper.toDto(user);
-        return ResponseEntity.ok(userDto);
+        var uri = uriBuilder.path("/users/{id}").buildAndExpand(userDto.getId()).toUri();
+        return ResponseEntity.created(uri).body(userDto);
     }
 }
