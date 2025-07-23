@@ -25,7 +25,7 @@ public class UserController {
     //Going to do a simple test to register a user for now.
     //Not checking for duplicates yet
 
-    @PostMapping
+    @PostMapping("/register")
     public ResponseEntity<?> registerUser(
             @Valid @RequestBody RegisterUserRequest request,
             UriComponentsBuilder uriBuilder
