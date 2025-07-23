@@ -1,9 +1,8 @@
 package com.gbueno.app.controllers;
-
 import com.gbueno.app.dtos.RegisterUserRequest;
-import com.gbueno.app.entities.UserDto;
 import com.gbueno.app.mappers.UserMapper;
 import com.gbueno.app.repositories.UserRepository;
+import com.gbueno.app.services.UserService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +20,7 @@ import java.util.Map;
 public class UserController {
     private final UserMapper userMapper;
     private final UserRepository userRepository;
+    private final UserService userService;
 
     //Going to do a simple test to register a user for now.
     //Not checking for duplicates yet
@@ -31,17 +31,6 @@ public class UserController {
             UriComponentsBuilder uriBuilder
     ) {
 
-        if (userRepository.existsByEmail(request.getEmail())) {
-            return ResponseEntity.badRequest().body(
-                    Map.of("email", "Email is already registered")
-            );
-        }
-
-        var user = userMapper.toEntity(request);
-        userRepository.save(user);
-
-        var userDto = userMapper.toDto(user);
-        var uri = uriBuilder.path("/users/{id}").buildAndExpand(userDto.getId()).toUri();
-        return ResponseEntity.created(uri).body(userDto);
+        return userService.registerUser(request, uriBuilder);
     }
 }
