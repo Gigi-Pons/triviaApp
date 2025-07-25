@@ -48,13 +48,8 @@ public class QuizService {
     public List<QuizDto> getAllQuizzes() {
         return quizRepository.findAll()
                 .stream()
-                .map(q -> {
-                    QuizDto dto = new QuizDto();
-                    dto.setId(q.getId());
-                    dto.setTitle((q.getTitle()));
-                    dto.setCategoryName(q.getCategory().getName());
-                    return dto;
-                }).toList();
+                .map(quizMapper::toDto)
+                .toList();
     }
 
     public List<CategoryDto> getAllCategories() {
@@ -67,7 +62,7 @@ public class QuizService {
     public QuizDto getRandomQuizByCategoryId(Long categoryId) {
         Quiz quiz = quizRepository.findRandomQuizByCategoryId(categoryId)
                 .orElseThrow(() -> new RuntimeException("No quiz found for this category"));
-        return quizMapper.toQuizDto(quiz);
+        return quizMapper.toDto(quiz);
     }
 
     public ResponseEntity<QuizWithQuestionsDto> getRandomQuizWithQuestions(Long categoryId) {

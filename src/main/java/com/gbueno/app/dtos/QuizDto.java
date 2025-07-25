@@ -6,5 +6,5 @@ import lombok.Data;
 public class QuizDto {
     private Long id;
     private String title;
-    private String categoryName;
+    private String category;
 }
