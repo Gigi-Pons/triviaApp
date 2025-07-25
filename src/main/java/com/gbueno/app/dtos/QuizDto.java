@@ -7,4 +7,5 @@ public class QuizDto {
     private Long id;
     private String title;
     private String category;
+    private int questionCount;
 }
