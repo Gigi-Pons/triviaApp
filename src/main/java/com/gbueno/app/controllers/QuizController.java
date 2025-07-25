@@ -6,6 +6,7 @@ import com.gbueno.app.dtos.QuizDto;
 import com.gbueno.app.dtos.QuizWithQuestionsDto;
 import com.gbueno.app.services.QuizService;
 import lombok.AllArgsConstructor;
+import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,8 +26,10 @@ public class QuizController {
     }
 
     @GetMapping("/quizzes")
-    public List<QuizDto> getQuizzes() {
-        return quizService.getAllQuizzes();
+    public ResponseEntity<List<QuizDto>> getAllQuizzes() {
+
+        List<QuizDto> quizzes = quizService.getAllQuizzes();
+        return ResponseEntity.ok(quizzes);
     }
 
     @GetMapping("/categories")
