@@ -16,7 +16,7 @@ import java.util.Map;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/users")
+@RequestMapping("/auth")
 public class UserController {
     private final UserMapper userMapper;
     private final UserRepository userRepository;

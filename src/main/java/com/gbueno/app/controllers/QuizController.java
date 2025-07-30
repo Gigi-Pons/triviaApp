@@ -13,29 +13,35 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/quizzes")
 @AllArgsConstructor
 public class QuizController {
     private final QuizService quizService;
 
-    @GetMapping("/quizzes/{id}/questions")
-    public List<QuestionDto> getQuizQuestions(
-            @PathVariable Long id //use when accessing a specific item or resource
-    ) {
-        return quizService.getQuizQuestions(id);
-    }
-
-    @GetMapping("/quizzes")
+    @GetMapping
     public ResponseEntity<List<QuizDto>> getAllQuizzes() {
 
         List<QuizDto> quizzes = quizService.getAllQuizzes();
         return ResponseEntity.ok(quizzes);
     }
 
+    @GetMapping("/{id}")
+    public List<QuestionDto> getQuizQuestions(
+            @PathVariable Long id //use when accessing a specific item or resource
+    ) {
+        return quizService.getQuizQuestions(id);
+        
+    }
+
+
+
+
     @GetMapping("/categories")
     public List<CategoryDto> getCategories() {
         return quizService.getAllCategories();
     }
+
+
 
     @GetMapping("/quizzes/random")
     public ResponseEntity<QuizWithQuestionsDto> getRandomQuiz(
