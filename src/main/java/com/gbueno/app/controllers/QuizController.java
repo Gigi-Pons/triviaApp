@@ -32,6 +32,9 @@ public class QuizController {
             @PathVariable Long id
     ) {
         QuizDto quiz = quizService.getQuizById(id);
+        if (quiz == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
         return ResponseEntity.ok(quiz);
     }
 
