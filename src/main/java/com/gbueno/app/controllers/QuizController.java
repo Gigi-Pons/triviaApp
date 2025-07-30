@@ -4,9 +4,11 @@ import com.gbueno.app.dtos.CategoryDto;
 import com.gbueno.app.dtos.QuestionDto;
 import com.gbueno.app.dtos.QuizDto;
 import com.gbueno.app.dtos.QuizWithQuestionsDto;
+import com.gbueno.app.entities.Quiz;
 import com.gbueno.app.services.QuizService;
 import lombok.AllArgsConstructor;
 import org.apache.coyote.Response;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,11 +28,11 @@ public class QuizController {
     }
 
     @GetMapping("/{id}")
-    public List<QuestionDto> getQuizQuestions(
-            @PathVariable Long id //use when accessing a specific item or resource
+    public ResponseEntity<QuizDto> getQuizById(
+            @PathVariable Long id
     ) {
-        return quizService.getQuizQuestions(id);
-        
+        QuizDto quiz = quizService.getQuizById(id);
+        return ResponseEntity.ok(quiz);
     }
 
 

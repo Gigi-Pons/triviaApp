@@ -2,6 +2,7 @@ package com.gbueno.app.repositories;
 
 import com.gbueno.app.entities.Category;
 import com.gbueno.app.entities.Quiz;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -16,4 +17,8 @@ public interface QuizRepository extends JpaRepository<Quiz, Long> {
 
     List<Quiz> findByCategory(Category category);
     //List<Quiz> findByCategoryId(Long categoryId);
+
+    @EntityGraph(attributePaths = {"questions", "questions.options"})
+    @Query("SELECT q FROM Quiz q WHERE q.id = :id")
+    Optional<Quiz> findByIdWithQuestions(@Param("id") Long id);
 }

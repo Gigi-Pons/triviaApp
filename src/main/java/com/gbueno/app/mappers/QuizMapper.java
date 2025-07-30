@@ -12,6 +12,5 @@ public interface QuizMapper {
     //converting a category into a categoryDTO
     CategoryDto toCategoryDto(Category category);
     @Mapping(target = "category", expression = "java(quiz.getCategory().getName())")
-    @Mapping(target = "questionCount", expression = "java(quiz.getQuestions().size())")
     QuizDto toDto(Quiz quiz);
 }

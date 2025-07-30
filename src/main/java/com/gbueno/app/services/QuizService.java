@@ -9,6 +9,8 @@ import com.gbueno.app.repositories.OptionRepository;
 import com.gbueno.app.repositories.QuestionRepository;
 import com.gbueno.app.repositories.QuizRepository;
 import lombok.AllArgsConstructor;
+import org.apache.coyote.Response;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -88,6 +90,12 @@ public class QuizService {
 
             dto.setQuestions(questions);
             return ResponseEntity.ok(dto);
+    }
+
+    public QuizDto getQuizById(Long id) {
+        var quiz = quizRepository.findByIdWithQuestions(id).orElse(null);
+
+        return quizMapper.toDto(quiz);
     }
 
 }
